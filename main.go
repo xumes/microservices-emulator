@@ -1,10 +1,10 @@
 package main
 
 import (
-	// "fmt"
+	"fmt"
 	// kafka2 "github.com/xumes/fullcycle-emulator/application/kafka"
 	"github.com/xumes/fullcycle-emulador/infra/kafka"
-	// ckafka "github.com/confluentinc/confluent-kafka-go/kafka"
+	ckafka "github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/joho/godotenv"
 	"log"
 )
@@ -17,12 +17,16 @@ func init() {
 }
 
 func main() {
+	msgChan := make(chan *ckafka.Message)
+	consumer := kafka.NewKafkaConsumer(msgChan)
 
-	producer := kafka.NewKafkaProducer()
-	kafka.Publish("ola", "route.new-direction", producer)
+	go consumer.Consume()
 
-	for {
-		_ = 1
+	// producer := kafka.NewKafkaProducer()
+	// kafka.Publish("ola", "route.new-direction", producer)
+
+	for msg := range msgChan {
+		fmt.Println(string( msg.Value))
 	}
 	// route := route2.Route{
 	// 	ID: "1",
