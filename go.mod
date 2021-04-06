@@ -1,4 +1,4 @@
-module github.com/xumes/fullcycle-emulador
+module github.com/xumes/fullcycle-emulator
 
 go 1.16
 

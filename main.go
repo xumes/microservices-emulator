@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	// kafka2 "github.com/xumes/fullcycle-emulator/application/kafka"
-	"github.com/xumes/fullcycle-emulador/infra/kafka"
+	kafka2 "github.com/xumes/fullcycle-emulator/application/kafka"
+	"github.com/xumes/fullcycle-emulator/infra/kafka"
 	ckafka "github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/joho/godotenv"
 	"log"
@@ -26,7 +26,8 @@ func main() {
 	// kafka.Publish("ola", "route.new-direction", producer)
 
 	for msg := range msgChan {
-		fmt.Println(string( msg.Value))
+		fmt.Println(string(msg.Value))
+		go kafka2.Produce(msg)
 	}
 	// route := route2.Route{
 	// 	ID: "1",

@@ -20,6 +20,10 @@ type Position struct {
 	Long float64 `json:"long`
 }
 
+func NewRoute() *Route {
+	return &Route{}
+}
+
 type PartialRoutePosition struct {
 	ID 			string 		`json:"routeId`
 	ClientID 	string		`json:"clientId`
