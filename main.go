@@ -1,8 +1,10 @@
 package main
 
 import (
-	"fmt"
-	route2 "github.com/xumes/fullcycle-emulador/application/route"
+	// "fmt"
+	// kafka2 "github.com/xumes/fullcycle-emulator/application/kafka"
+	"github.com/xumes/fullcycle-emulador/infra/kafka"
+	// ckafka "github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/joho/godotenv"
 	"log"
 )
@@ -15,13 +17,20 @@ func init() {
 }
 
 func main() {
-	route := route2.Route{
-		ID: "1",
-		ClientID: "1",
+
+	producer := kafka.NewKafkaProducer()
+	kafka.Publish("ola", "route.new-direction", producer)
+
+	for {
+		_ = 1
 	}
+	// route := route2.Route{
+	// 	ID: "1",
+	// 	ClientID: "1",
+	// }
 
-	route.LoadPositions()
+	// route.LoadPositions()
 
-	stringjson, _ := route.ExportJsonPositions()
-	fmt.Println(stringjson[0])
+	// stringjson, _ := route.ExportJsonPositions()
+	// fmt.Println(stringjson[0])
 }
